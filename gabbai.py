@@ -14,6 +14,35 @@ class Gabbai:
         print(body)
         #whatsapp_messenger.send_text(body=body,name=None,phone_number=None,chat_name="A2Minyan")
     
+    def send_shacharit_text_to_minyan_chat(self):
+        day_determiner = DayDeterminer()
+        shacharit_components = {}
+        day = day_determiner.determine_day()
+        if day == 'Monday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Hillel"
+        elif day == 'Tuesday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Chabad"
+        elif day == 'Wednesday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Chabad"
+        elif day == 'Thursday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Chabad"
+        elif day == 'Saturday':
+            shacharit_components["time"] = "8:30"
+            shacharit_components["place"] = "Hillel"
+        elif day == 'Sunday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Hillel"
+        else: #friday
+            print('no need to announce shacharit for tomorrow :)')
+        
+        body = f"Shacharit tomorrow will be {shacharit_components['time']} at {shacharit_components['place']}"
+        print(body)
+
+
     def text_people_for_shacharit(self, filename: str):
         whatsapp_messenger = WhatsappMessenger()
         with open(filename, 'r') as file:
@@ -35,12 +64,12 @@ class Gabbai:
 
 def main():
     gabbai = Gabbai()
-    option = input('type m for mincha text, s for shacharit reminder (q to quit) (m/s/q)')
+    option = input('type m for mincha text, s for shacharit text, r for shacharit reminders (q to quit) (m/s/r/q): ')
     if option == 'm':
         gabbai.send_mincha_text_to_minyan_chat()
-    elif option == 's':
+    elif option == 'r':
         day_determiner = DayDeterminer()
-        day = str(day_determiner.determine_day()).lower()
+        day = str(day_determiner.determine_day())
         #will send this text the day before, so <current day> means text everyone
         #for the next day
         if day == 'Monday':
@@ -57,7 +86,9 @@ def main():
             gabbai.text_people_for_shacharit(filename='monday_names.csv')
         else: #friday
             print('no need to text people for shabbos davening :)')
-
+        
+    elif option == 's':
+        gabbai.send_shacharit_text_to_minyan_chat()
 
 
 
