@@ -11,12 +11,13 @@ class DayDeterminer:
         hours, minutes = map(int, time.split(':'))
         if minutes >= 20:
             minutes -= 20
-            new_time = f"{hours}:{minutes:02}"
         else:
             offset = 20 - minutes
             minutes = 60 - offset
             hours -= 1
-            new_time = f"{hours}:{minutes:02}"
+            
+        minutes = (minutes // 5) * 5
+        new_time = f"{hours}:{minutes:02}"
         return new_time
 
 def main():

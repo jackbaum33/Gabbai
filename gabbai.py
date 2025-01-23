@@ -10,7 +10,7 @@ class Gabbai:
         #whatsapp_messenger = WhatsappMessenger()
         shkiyah = my_zmanim_scraper.get_times()["shkiyah"]
         mincha_time = day_determiner.calculate_correct_mincha_time(time=shkiyah)
-        body = f"Mincha today will be scheduled for {mincha_time}"
+        body = f"Mincha today is scheduled for {mincha_time} at hillel"
         print(body)
         #whatsapp_messenger.send_text(body=body,name=None,phone_number=None,chat_name="A2Minyan")
     
