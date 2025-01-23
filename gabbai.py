@@ -16,6 +16,8 @@ class Gabbai:
     
     def send_shacharit_text_to_minyan_chat(self):
         day_determiner = DayDeterminer()
+        whatsapp_messenger = WhatsappMessenger()
+        whatsapp_messenger.wait_for_qr_scan()
         shacharit_components = {}
         day = day_determiner.determine_day()
         if day == 'Monday':
@@ -41,7 +43,8 @@ class Gabbai:
         
         body = f"Shacharit tomorrow will be {shacharit_components['time']} at {shacharit_components['place']}"
         print(body)
-
+        time.sleep(10)
+        whatsapp_messenger.send_text(body=body,name=None,phone_number=None,chat_name="A2Minyan")
 
     def text_people_for_shacharit(self, filename: str):
         whatsapp_messenger = WhatsappMessenger()
