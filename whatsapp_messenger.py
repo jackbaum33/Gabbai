@@ -66,12 +66,12 @@ class WhatsappMessenger():
             if chat_name is None:
                 for char in phone_number:
                     search_box.send_keys(char)
-                    time.sleep(0.08)
+                    time.sleep(0.15)
             else:
                 for char in chat_name:
                     search_box.send_keys(char)
                     time.sleep(0.08)
-            #time.sleep(2)
+            time.sleep(2)
         except TimeoutException:
             print("Error: Search box not found or not interactable.")
             return

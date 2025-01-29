@@ -82,8 +82,7 @@ class Gabbai:
                     break
                 phone_number = info[1]
                 name = info[0]
-                body = f'hey just a reminder that tomorrow is your day for shacharit, it is taking place
-                at {shacharit_components["time"]} at {shacharit_components["place"]}'
+                body = f'hey just a reminder that tomorrow is your day for shacharit, it is taking place at {shacharit_components["time"]} at {shacharit_components["place"]}'
                 whatsapp_messenger.send_text(body=body,
                                              name=name,
                                              phone_number=phone_number,
