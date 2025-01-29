@@ -46,11 +46,32 @@ class Gabbai:
         
         body = f"Shacharit tomorrow will be {shacharit_components['time']} at {shacharit_components['place']}"
         print(body)
-        time.sleep(10)
+        time.sleep(5)
         whatsapp_messenger.send_text(body=body,name=None,phone_number=None,chat_name="A2Minyan")
 
     def text_people_for_shacharit(self, filename: str):
         whatsapp_messenger = WhatsappMessenger()
+        day_determiner = DayDeterminer()
+        shacharit_components = {}
+        day = day_determiner.determine_day()
+        if day == 'Monday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Hillel"
+        elif day == 'Tuesday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Chabad"
+        elif day == 'Wednesday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Chabad"
+        elif day == 'Thursday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Chabad"
+        elif day == 'Saturday':
+            shacharit_components["time"] = "8:30"
+            shacharit_components["place"] = "Hillel"
+        elif day == 'Sunday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Hillel"
         with open(filename, 'r') as file:
             for line in file:
                 info = line.split(',')
@@ -61,11 +82,13 @@ class Gabbai:
                     break
                 phone_number = info[1]
                 name = info[0]
-                body = 'hey just a reminder that tomorrow is your day for shacharit'
+                body = f'hey just a reminder that tomorrow is your day for shacharit, it is taking place
+                at {shacharit_components["time"]} at {shacharit_components["place"]}'
                 whatsapp_messenger.send_text(body=body,
                                              name=name,
                                              phone_number=phone_number,
                                              chat_name=None)
+                time.sleep(4)
 
 
 def main():
