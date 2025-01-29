@@ -51,6 +51,7 @@ class Gabbai:
 
     def text_people_for_shacharit(self, filename: str):
         whatsapp_messenger = WhatsappMessenger()
+        whatsapp_messenger.wait_for_qr_scan()
         day_determiner = DayDeterminer()
         shacharit_components = {}
         day = day_determiner.determine_day()
@@ -72,6 +73,7 @@ class Gabbai:
         elif day == 'Sunday':
             shacharit_components["time"] = "7:30"
             shacharit_components["place"] = "Hillel"
+        time.sleep(5)
         with open(filename, 'r') as file:
             for line in file:
                 info = line.split(',')
