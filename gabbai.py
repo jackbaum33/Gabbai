@@ -7,12 +7,15 @@ class Gabbai:
     def send_mincha_text_to_minyan_chat(self):
         day_determiner = DayDeterminer()
         my_zmanim_scraper = myZmanimScraper()
-        #whatsapp_messenger = WhatsappMessenger()
+        whatsapp_messenger = WhatsappMessenger()
+        whatsapp_messenger.wait_for_qr_scan()
         shkiyah = my_zmanim_scraper.get_times()["shkiyah"]
         mincha_time = day_determiner.calculate_correct_mincha_time(time=shkiyah)
-        body = f"Mincha today is scheduled for {mincha_time} at hillel"
+        print(mincha_time)
+        keep = input("continue?")
+        body = f"Mincha today is scheduled for {mincha_time} at Hillel"
         print(body)
-        #whatsapp_messenger.send_text(body=body,name=None,phone_number=None,chat_name="A2Minyan")
+        whatsapp_messenger.send_text(body=body,name=None,phone_number=None,chat_name="A2Minyan")
     
     def send_shacharit_text_to_minyan_chat(self):
         day_determiner = DayDeterminer()

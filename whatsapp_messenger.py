@@ -78,14 +78,33 @@ class WhatsappMessenger():
         time.sleep(2)
         
         try:
-            input_box_xpath = '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div[1]/p'
-            input_box = WDWait(self.driver, 20).until(
-                EC.element_to_be_clickable((By.XPATH, input_box_xpath))
-            )
-            self.driver.execute_script("arguments[0].focus();", input_box)
-            input_box.clear()
-            input_box.send_keys(body)
-            input_box.send_keys(Keys.ENTER)
+            if chat_name is None:
+                input_box_xpath = '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div[1]/p'
+                input_box = WDWait(self.driver, 20).until(
+                EC.element_to_be_clickable((By.XPATH, input_box_xpath)))
+                self.driver.execute_script("arguments[0].focus();", input_box)
+                input_box.clear()
+                input_box.send_keys(body)
+                input_box.send_keys(Keys.ENTER)
+            else:
+                first_result = WDWait(self.driver, 20).until(
+                    EC.element_to_be_clickable((By.XPATH,
+                "//span[@title='A2Minyan'][not(contains(., 'Daily'))][not(contains(., 'Community'))]")))
+                self.driver.execute_script("arguments[0].click();", first_result)
+                time.sleep(1)
+                print("successfully clicked on chat!")
+                time.sleep(5)
+                message_box = WDWait(self.driver, 20).until(
+                        EC.element_to_be_clickable((By.XPATH, "//div[@role='textbox'][@data-tab='10']"))
+                    )
+                print("successfully found text box!")
+                message_box.send_keys(body)
+                time.sleep(3)
+                print("successfully entered text!")
+                #message_box.send_keys(Keys.ENTER)
+                self.driver.execute_script("arguments[0].dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));", message_box)
+                print("successfully finished program!")
+                time.sleep(5)
         except TimeoutException:
-            print(f"Error: Could not send message to {name}.")
-            return
+            print(f"Error: Could not send message to {name if name else chat_name}.")
+        return
