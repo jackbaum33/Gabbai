@@ -39,6 +39,7 @@ class Gabbai:
             for line in file:
                 info = line.split(',')
                 if(info[0]=='name'):
+                    time.sleep(3)
                     continue
                 if(info[0]=='end'):
                     time.sleep(1.5)
