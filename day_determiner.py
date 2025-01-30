@@ -20,6 +20,32 @@ class DayDeterminer:
         new_time = f"{hours}:{minutes:02}"
         return new_time
 
+    def assign_shacharit_info(self,day: str) -> dict:
+        shacharit_components = {}
+        if day == 'Monday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Hillel"
+        elif day == 'Tuesday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Chabad"
+        elif day == 'Wednesday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Chabad"
+        elif day == 'Thursday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Chabad"
+        elif day == 'Saturday':
+            shacharit_components["time"] = "8:30"
+            shacharit_components["place"] = "Hillel"
+        elif day == 'Sunday':
+            shacharit_components["time"] = "7:30"
+            shacharit_components["place"] = "Hillel"
+        else: #friday
+            print('no need to announce shacharit for tomorrow :)')
+        return shacharit_components
+
+
+
 def main():
     day_determiner = DayDeterminer()
     current_day = day_determiner.determine_day()

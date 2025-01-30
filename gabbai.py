@@ -21,29 +21,8 @@ class Gabbai:
         day_determiner = DayDeterminer()
         whatsapp_messenger = WhatsappMessenger()
         whatsapp_messenger.wait_for_qr_scan()
-        shacharit_components = {}
         day = day_determiner.determine_day()
-        if day == 'Monday':
-            shacharit_components["time"] = "7:30"
-            shacharit_components["place"] = "Hillel"
-        elif day == 'Tuesday':
-            shacharit_components["time"] = "7:30"
-            shacharit_components["place"] = "Chabad"
-        elif day == 'Wednesday':
-            shacharit_components["time"] = "7:30"
-            shacharit_components["place"] = "Chabad"
-        elif day == 'Thursday':
-            shacharit_components["time"] = "7:30"
-            shacharit_components["place"] = "Chabad"
-        elif day == 'Saturday':
-            shacharit_components["time"] = "8:30"
-            shacharit_components["place"] = "Hillel"
-        elif day == 'Sunday':
-            shacharit_components["time"] = "7:30"
-            shacharit_components["place"] = "Hillel"
-        else: #friday
-            print('no need to announce shacharit for tomorrow :)')
-        
+        shacharit_components = day_determiner.assign_shacharit_info(day=day)
         body = f"Shacharit tomorrow will be {shacharit_components['time']} at {shacharit_components['place']}"
         print(body)
         time.sleep(5)
@@ -53,26 +32,8 @@ class Gabbai:
         whatsapp_messenger = WhatsappMessenger()
         whatsapp_messenger.wait_for_qr_scan()
         day_determiner = DayDeterminer()
-        shacharit_components = {}
         day = day_determiner.determine_day()
-        if day == 'Monday':
-            shacharit_components["time"] = "7:30"
-            shacharit_components["place"] = "Hillel"
-        elif day == 'Tuesday':
-            shacharit_components["time"] = "7:30"
-            shacharit_components["place"] = "Chabad"
-        elif day == 'Wednesday':
-            shacharit_components["time"] = "7:30"
-            shacharit_components["place"] = "Chabad"
-        elif day == 'Thursday':
-            shacharit_components["time"] = "7:30"
-            shacharit_components["place"] = "Chabad"
-        elif day == 'Saturday':
-            shacharit_components["time"] = "8:30"
-            shacharit_components["place"] = "Hillel"
-        elif day == 'Sunday':
-            shacharit_components["time"] = "7:30"
-            shacharit_components["place"] = "Hillel"
+        shacharit_components = day_determiner.assign_shacharit_info(day=day)
         time.sleep(5)
         with open(filename, 'r') as file:
             for line in file:
