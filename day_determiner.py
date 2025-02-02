@@ -9,10 +9,10 @@ class DayDeterminer:
     
     def calculate_correct_mincha_time(self,time: str) ->str:
         hours, minutes = map(int, time.split(':'))
-        if minutes >= 20:
-            minutes -= 20
+        if minutes >= 15:
+            minutes -= 15
         else:
-            offset = 20 - minutes
+            offset = 15 - minutes
             minutes = 60 - offset
             hours -= 1
             
